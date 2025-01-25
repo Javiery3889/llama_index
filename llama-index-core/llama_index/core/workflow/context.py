@@ -1,14 +1,14 @@
 import asyncio
 import json
-import warnings
 import uuid
+import warnings
 from collections import defaultdict
-from typing import Dict, Any, Optional, List, Type, TYPE_CHECKING, Set, Tuple, TypeVar
+from typing import TYPE_CHECKING, Any, Dict, List, Optional, Set, Tuple, Type, TypeVar
 
 from .context_serializers import BaseSerializer, JsonSerializer
 from .decorators import StepConfig
-from .events import Event
 from .errors import WorkflowRuntimeError
+from .events import Event
 
 if TYPE_CHECKING:  # pragma: no cover
     from .workflow import Workflow
@@ -225,7 +225,7 @@ class Context:
         Use `get` and `set` instead.
         """
         msg = "`data` is deprecated, please use the `get` and `set` method to store data into the Context."
-        warnings.warn(msg, DeprecationWarning)
+        warnings.warn(msg, DeprecationWarning, stacklevel=2)
         return self._globals
 
     @property
@@ -237,7 +237,7 @@ class Context:
     def session(self) -> "Context":
         """This property is provided for backward compatibility."""
         msg = "`session` is deprecated, please use the Context instance directly."
-        warnings.warn(msg, DeprecationWarning)
+        warnings.warn(msg, DeprecationWarning, stacklevel=2)
         return self
 
     def collect_events(
